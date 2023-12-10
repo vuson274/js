@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+        <div>
+            <ul id="add">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>7</li>
+                <li>10</li>
+            </ul>
+            <ul id="add2">
+                <li>1</li>
+                <li>3</li>
+                <li>7</li>
+                <li>10</li>
+                <li>12</li>
+            </ul>
+            <ul id="coppy">
+
+            </ul>
+            <ul id="coppy2">
+
+            </ul>
+            <button onclick="add()">Add</button>
+            <button onclick="remove()">Remove</button>
+            <button onclick="reverse()">reverse</button>
+            <button onclick="coppy()">coppy</button>
+            <button onclick="coppy2()">coppy</button>
+        </div>
+    <script>
+        function add(){
+            var ul = document.getElementById("add");
+            var li = document.createElement("li");
+            var add = Number(ul.lastElementChild.textContent);
+            li.appendChild(document.createTextNode(add + 1 ));
+            ul.appendChild(li);
+        }
+        function remove(){
+            var ul    = document.getElementById('add');
+            ul.removeChild(ul.lastElementChild); 
+        }
+        function reverse(){
+            var ul    = document.getElementById('add');
+            var i = ul.children.length;
+            while (i--)
+            ul.appendChild(ul.children[i]);
+        }
+        function coppy(){
+            var ul = $('#add');
+            ul.children().clone().appendTo('#coppy');
+        }
+        function coppy2(){
+            const ul = $('#add').children();
+            const ul2 = $('#add2').children();
+            const arr = [];
+            const arr2 = [];
+            for (let i = 0; i < ul.length; i++) {
+                arr.push(ul[i].textContent);
+            }
+            for (let i = 0; i < ul2.length; i++) {
+                arr2.push(ul2[i].textContent);
+            }
+            const ul3 = arr.filter((element) => {
+                return arr2.includes(element);
+            });
+            let li;
+            for (let i = 0; i < ul3.length; i++) {
+                li = document.createElement("li");
+                li.appendChild(document.createTextNode(ul3[i]));
+                document.getElementById("coppy2").appendChild(li);
+            }
+        }
+    </script>
+</body>
+</html>
